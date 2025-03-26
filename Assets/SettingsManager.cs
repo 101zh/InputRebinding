@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] InputAction[] allPlayerControls;
     [SerializeField] List<InputBinding> allBindings;
     [SerializeField] GameObject bindingObj;
+    [SerializeField] GameObject controlHeader;
     [SerializeField] Transform bindingContainer;
     [SerializeField] GameObject cover;
 
@@ -22,7 +24,7 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         sampleInput = new SampleInput();
-        move = sampleInput.Player.Move;
+        move = sampleInput.Player.Movement;
         jump = sampleInput.Player.Jump;
         jump.Enable();
         move.Enable();
@@ -34,6 +36,7 @@ public class SettingsManager : MonoBehaviour
         {
             if (allPlayerControls[i].bindings[0].isComposite)
             {
+                Instantiate(controlHeader, bindingContainer).GetComponent<TMP_Text>().text = allPlayerControls[i].name;
                 for (int j = 1; j < allPlayerControls[i].bindings.Count; j++)
                 {
                     GameObject g = Instantiate(bindingObj, bindingContainer);
@@ -73,6 +76,7 @@ public class SettingsManager : MonoBehaviour
 
     private static void onRebindCancel()
     {
+        coverGameObj.SetActive(false);
         Debug.Log("canceled");
     }
 

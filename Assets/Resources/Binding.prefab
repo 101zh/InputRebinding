@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7816965890065178520}
-  - component: {fileID: 6432557001474819563}
+  - component: {fileID: 2949313997619902745}
   m_Layer: 5
   m_Name: Binding
   m_TagString: Untagged
@@ -172,7 +172,7 @@ RectTransform:
   m_AnchoredPosition: {x: -72, y: 11}
   m_SizeDelta: {x: 689.2671, y: 127.2363}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6432557001474819563
+--- !u!114 &2949313997619902745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +184,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8321c3bf92fa8a4599f7b4bf469adf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BindingName: {fileID: 602627413513535230}
+  inputAction:
+    m_Name: Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: eea3256b-bae2-4ccb-9f75-5f9b52aaaa90
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  bindingIndex: 0
+  bindingName: {fileID: 602627413513535230}
   keyBinding: {fileID: 3180574429157121295}
 --- !u!1 &1046586750331860695
 GameObject:
@@ -307,7 +317,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6432557001474819563}
+      - m_Target: {fileID: 2949313997619902745}
         m_TargetAssemblyTypeName: BindingGameObject, Assembly-CSharp
         m_MethodName: rebindInput
         m_Mode: 1
