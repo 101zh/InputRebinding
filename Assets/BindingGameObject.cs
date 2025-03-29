@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class BindingGameObject : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class BindingGameObject : MonoBehaviour
     [SerializeField] TMP_Text bindingName;
     [SerializeField] TMP_Text keyBinding;
 
-    public void fillInInformation(InputAction inputAction, int bindingIndex)
+    public void FillInInformation(InputAction inputAction, int bindingIndex)
     {
         this.inputAction = inputAction;
         this.bindingIndex = bindingIndex;
@@ -24,13 +22,13 @@ public class BindingGameObject : MonoBehaviour
                 InputControlPath.HumanReadableStringOptions.OmitDevice);
     }
 
-    public void rebindInput()
+    public void RebindInput()
     {
-        SettingsManager.rebindBindingAtIndex(this);
+        TitleMenuManager.instance.StartInteractiveRebind(this);
     }
 
-    public void refresh()
+    public void Refresh()
     {
-        fillInInformation(inputAction, bindingIndex);
+        FillInInformation(inputAction, bindingIndex);
     }
 }

@@ -319,7 +319,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2949313997619902745}
         m_TargetAssemblyTypeName: BindingGameObject, Assembly-CSharp
-        m_MethodName: rebindInput
+        m_MethodName: RebindInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
