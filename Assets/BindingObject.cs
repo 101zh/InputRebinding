@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BindingGameObject : MonoBehaviour
+public class BindingObject : MonoBehaviour
 {
     public InputAction inputAction;
     public int bindingIndex;

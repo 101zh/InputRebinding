@@ -15,11 +15,14 @@ public class TitleMenuManager : MonoBehaviour
     /// <summary> The transform that stores each separate binding. </summary>
     [SerializeField] Transform bindingContainer;
     /// <summary> A gameobject that dims the screen when active. </summary>
-    [SerializeField] GameObject screenDimmer;
+    [SerializeField] GameObject screenDimmerObj;
+    [SerializeField] TMP_Text screenDimText;
+    [SerializeField] string rebindingInputDimmedScreenText = "Listening for Input...";
+    [SerializeField] string duplicateBindingDimmedScreenText = "Duplicate Binding\nTry Again";
+
 
     [SerializeField] List<TMP_Text> titleScreenText;
 
-    static GameObject screenDimmerObj;
 
     private void Awake()
     {
@@ -36,8 +39,6 @@ public class TitleMenuManager : MonoBehaviour
 
     void Start()
     {
-        screenDimmerObj = screenDimmer;
-
         AutoGenerateBindings(InputManager.sampleInput, bindingContainer, controlHeader, bindingObj);
     }
 
@@ -50,25 +51,35 @@ public class TitleMenuManager : MonoBehaviour
         titleScreenText[4].text = "Ability 2 is pressed: " + InputManager.ability2.IsPressed();
     }
 
-    public void StartInteractiveRebind(BindingGameObject bindingGameObject)
+    public void StartInteractiveRebind(BindingObject bindingObject)
     {
         screenDimmerObj.SetActive(true);
-        InputManager.RebindBindingAtIndex(bindingGameObject.inputAction,
-            bindingGameObject.bindingIndex,
+        InputManager.RebindBindingAtIndex(
+            bindingObject,
             OnRebindCancel,
-            () => OnRebindComplete(bindingGameObject));
+            OnRebindComplete);
     }
 
-    private void OnRebindComplete(BindingGameObject bindingGameObject)
+    private void OnRebindComplete(BindingObject bindingObject, bool foundDuplicate)
     {
         screenDimmerObj.SetActive(false);
-        bindingGameObject.Refresh();
+        bindingObject.Refresh();
         Debug.Log("completed");
+        if (foundDuplicate)
+        {
+            StartInteractiveRebind(bindingObject);
+            screenDimText.text = duplicateBindingDimmedScreenText;
+        }
+        else
+        {
+            screenDimText.text = rebindingInputDimmedScreenText;
+        }
     }
 
     private void OnRebindCancel()
     {
         screenDimmerObj.SetActive(false);
+        screenDimText.text = rebindingInputDimmedScreenText;
         Debug.Log("canceled");
     }
 
@@ -92,13 +103,13 @@ public class TitleMenuManager : MonoBehaviour
                 for (int j = 1; j < allPlayerControls[i].bindings.Count; j++)
                 {
                     GameObject g = Instantiate(bindingObj, containerForBindings);
-                    g.GetComponent<BindingGameObject>().FillInInformation(allPlayerControls[i], j);
+                    g.GetComponent<BindingObject>().FillInInformation(allPlayerControls[i], j);
                 }
             }
             else
             {
                 GameObject g = Instantiate(bindingObj, containerForBindings);
-                g.GetComponent<BindingGameObject>().FillInInformation(allPlayerControls[i], 0);
+                g.GetComponent<BindingObject>().FillInInformation(allPlayerControls[i], 0);
             }
         }
     }

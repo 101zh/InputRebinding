@@ -1416,7 +1416,12 @@ MonoBehaviour:
   bindingObj: {fileID: 534714220104136321, guid: fb5a84aec2bedd746bad0b2784303995, type: 3}
   controlHeader: {fileID: 255350457983709190, guid: 5b132031a93ef8e46904ef266a4124c3, type: 3}
   bindingContainer: {fileID: 1047811788}
-  screenDimmer: {fileID: 1757053600}
+  screenDimmerObj: {fileID: 1757053600}
+  screenDimText: {fileID: 1464094281}
+  rebindingInputDimmedScreenText: Listening for Input...
+  duplicateBindingDimmedScreenText: 'Duplicate Binding
+
+    Try Again'
   titleScreenText:
   - {fileID: 53412261}
   - {fileID: 1025165161}
