@@ -20,7 +20,10 @@ public class BindingObject : MonoBehaviour
         this.bindingIndex = bindingIndex;
 
         string bName = inputAction.bindings[bindingIndex].name;
-        bindingName.text = bName == null || bName.Length == 0 ? inputAction.name : bName;
+        bName = bName == null || bName.Length == 0 ? inputAction.name : bName;
+        bName = SettingsManager.instance.useHeaderAsLabel && inputAction.bindings[bindingIndex].isPartOfComposite 
+            ? inputAction.name + ": " + bName : bName;
+        bindingName.text = bName;
 
         keyBinding.text = InputControlPath.ToHumanReadableString(
                 inputAction.bindings[bindingIndex].effectivePath,

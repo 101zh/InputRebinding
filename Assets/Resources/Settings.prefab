@@ -1460,6 +1460,7 @@ MonoBehaviour:
   duplicateBindingDimmedScreenText: 'Duplicate Binding
 
     Try Again'
+  useHeaderAsLabel: 0
 --- !u!1 &7397645937608360067
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] TMP_Text screenDimText;
     [SerializeField] string rebindingInputDimmedScreenText = "Listening for Input...";
     [SerializeField] string duplicateBindingDimmedScreenText = "Duplicate Binding\nTry Again";
+    public bool useHeaderAsLabel = false;
 
     public delegate void SettingsManagerEvent();
     public static SettingsManagerEvent refreshAllBindings;
@@ -95,7 +96,10 @@ public class SettingsManager : MonoBehaviour
         {
             if (allPlayerControls[i].bindings[0].isComposite)
             {
-                Instantiate(headerForControls, containerForBindings).GetComponent<TMP_Text>().text = allPlayerControls[i].name;
+                if (!useHeaderAsLabel)
+                {
+                    Instantiate(headerForControls, containerForBindings).GetComponent<TMP_Text>().text = allPlayerControls[i].name;
+                }
                 for (int j = 1; j < allPlayerControls[i].bindings.Count; j++)
                 {
                     GameObject g = Instantiate(bindingObj, containerForBindings);
