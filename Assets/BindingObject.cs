@@ -24,7 +24,7 @@ public class BindingObject : MonoBehaviour
 
     public void RebindInput()
     {
-        TitleMenuManager.instance.StartInteractiveRebind(this);
+        SettingsManager.instance.StartInteractiveRebind(this);
     }
 
     public void Refresh()
