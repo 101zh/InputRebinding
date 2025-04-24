@@ -19,6 +19,9 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] string rebindingInputDimmedScreenText = "Listening for Input...";
     [SerializeField] string duplicateBindingDimmedScreenText = "Duplicate Binding\nTry Again";
 
+    public delegate void SettingsManagerEvent();
+    public static SettingsManagerEvent refreshAllBindings;
+
     private void Awake()
     {
         if (instance == null)
@@ -36,6 +39,12 @@ public class SettingsManager : MonoBehaviour
     void Start()
     {
         AutoGenerateBindings(InputManager.sampleInput, bindingContainer, controlHeader, bindingObj);
+    }
+
+    public void resetKeyBindings()
+    {
+        InputManager.resetKeyBindings();
+        refreshAllBindings?.Invoke();
     }
 
     public void StartInteractiveRebind(BindingObject bindingObject)

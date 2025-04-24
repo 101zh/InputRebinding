@@ -58,6 +58,11 @@ public class InputManager : MonoBehaviour
         ability2.Disable();
     }
 
+    public static void resetKeyBindings()
+    {
+        scope.RemoveAllBindingOverrides();
+    }
+
     public static void RebindBindingAtIndex(BindingObject bindingObject, Action onCancel, Action<BindingObject, bool> onComplete)
     {
         InputAction inputAction = bindingObject.inputAction;

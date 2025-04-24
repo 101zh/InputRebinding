@@ -9,6 +9,11 @@ public class BindingObject : MonoBehaviour
     [SerializeField] TMP_Text bindingName;
     [SerializeField] TMP_Text keyBinding;
 
+    private void Start()
+    {
+        SettingsManager.refreshAllBindings += Refresh;
+    }
+
     public void FillInInformation(InputAction inputAction, int bindingIndex)
     {
         this.inputAction = inputAction;
