@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     public static InputAction ability1 { get; private set; }
     public static InputAction ability2 { get; private set; }
 
+    [SerializeField] private bool allowDuplicateBindings = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -70,7 +72,7 @@ public class InputManager : MonoBehaviour
             .OnCancel(operation => onCancel())
             .OnComplete(operation =>
             {
-                bool isDuplicateBinding = checkForDuplicateBinding(inputAction, bindingIndex, inputAction.bindings[bindingIndex].isPartOfComposite);
+                bool isDuplicateBinding = !instance.allowDuplicateBindings && checkForDuplicateBinding(inputAction, bindingIndex, inputAction.bindings[bindingIndex].isPartOfComposite);
                 if (isDuplicateBinding)
                 {
                     inputAction.ApplyBindingOverride(initialBinding);
