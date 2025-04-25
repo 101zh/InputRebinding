@@ -39,7 +39,7 @@ public class SettingsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AutoGenerateBindings(InputManager.sampleInput, bindingContainer, controlHeader, bindingObj);
+        AutoGenerateBindings(InputManager.scope, bindingContainer, controlHeader, bindingObj);
     }
 
     public void resetKeyBindings()
@@ -83,15 +83,14 @@ public class SettingsManager : MonoBehaviour
     /// <summary>
     /// A method that auto fills a container with binding prefabs.
     /// </summary>
-    /// <param name="sampleInput"> An instance of the generated C# class from the input action asset </param>
+    /// <param name="inputMap"> The particular map of bindings that you want to make available to rebind </param>
     /// <param name="containerForBindings"> The container that stores the binding objects. </param>
     /// <param name="headerForControls"> A prefab that acts as a header for each section of inputs. </param>
     /// <param name="bindingObj"> A prefab that contains the binding name and a button to reassign that binding. </param>
-    private void AutoGenerateBindings(SampleInput sampleInput, Transform containerForBindings, GameObject headerForControls, GameObject bindingObj)
+    private void AutoGenerateBindings(InputActionMap inputMap, Transform containerForBindings, GameObject headerForControls, GameObject bindingObj)
     {
-        InputAction[] allPlayerControls;
+        InputAction[] allPlayerControls = inputMap.actions.ToArray();
 
-        allPlayerControls = sampleInput.Player.Get().ToArray();
         for (int i = 0; i < allPlayerControls.Length; i++)
         {
             if (allPlayerControls[i].bindings[0].isComposite)

@@ -21,7 +21,7 @@ public class BindingObject : MonoBehaviour
 
         string bName = inputAction.bindings[bindingIndex].name;
         bName = bName == null || bName.Length == 0 ? inputAction.name : bName;
-        bName = SettingsManager.instance.useHeaderAsLabel && inputAction.bindings[bindingIndex].isPartOfComposite 
+        bName = SettingsManager.instance.useHeaderAsLabel && inputAction.bindings[bindingIndex].isPartOfComposite
             ? inputAction.name + ": " + bName : bName;
         bindingName.text = bName;
 
