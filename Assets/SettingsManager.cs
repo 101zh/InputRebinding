@@ -34,6 +34,9 @@ public class SettingsManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        bindingObj = bindingObj == null ? Resources.Load<GameObject>("Prefabs/Binding") : bindingObj;
+        controlHeader = controlHeader == null ? Resources.Load<GameObject>("Prefabs/Header") : controlHeader;
     }
 
     // Start is called before the first frame update
