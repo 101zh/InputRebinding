@@ -32,6 +32,11 @@ public class InputManager : MonoBehaviour
         sampleInput = new SampleInput();
 
         scope = sampleInput.Player;
+        string rebindsJSON = PlayerPrefs.GetString("rebinds");
+        if (!(rebindsJSON == null || rebindsJSON.Length == 0))
+        {
+            scope.LoadBindingOverridesFromJson(rebindsJSON);
+        }
 
         move = sampleInput.Player.Movement;
         jump = sampleInput.Player.Jump;
@@ -61,6 +66,7 @@ public class InputManager : MonoBehaviour
     public static void resetKeyBindings()
     {
         scope.RemoveAllBindingOverrides();
+        saveBindingOverridesAsJson();
     }
 
     public static void RebindBindingAtIndex(BindingObject bindingObject, Action onCancel, Action<BindingObject, bool> onComplete)
@@ -81,6 +87,10 @@ public class InputManager : MonoBehaviour
                 if (isDuplicateBinding)
                 {
                     inputAction.ApplyBindingOverride(initialBinding);
+                }
+                else
+                {
+                    saveBindingOverridesAsJson();
                 }
                 onComplete(bindingObject, isDuplicateBinding);
             });
@@ -117,5 +127,10 @@ public class InputManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private static void saveBindingOverridesAsJson()
+    {
+        PlayerPrefs.SetString("rebinds", scope.SaveBindingOverridesAsJson());
     }
 }
