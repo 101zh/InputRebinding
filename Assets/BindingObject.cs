@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary> The script attached to a binding prefab </summary>
 public class BindingObject : MonoBehaviour
 {
     public InputAction inputAction;
@@ -11,9 +12,14 @@ public class BindingObject : MonoBehaviour
 
     private void Start()
     {
-        SettingsManager.refreshAllBindings += Refresh;
+        SettingsManager.refreshAllBindings += Refresh; // Subscribes to an event that refreshes all binding prefabs
     }
 
+    /// <summary>
+    /// Assigns the text fields with the correct characters based off an input action and a binding index
+    /// </summary>
+    /// <param name="inputAction"> The input action that this particular binding will rebind </param>
+    /// <param name="bindingIndex"> The index of the binding within the input action </param>
     public void FillInInformation(InputAction inputAction, int bindingIndex)
     {
         this.inputAction = inputAction;

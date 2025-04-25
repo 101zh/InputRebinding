@@ -45,12 +45,19 @@ public class SettingsManager : MonoBehaviour
         AutoGenerateBindings(InputManager.scope, bindingContainer, controlHeader, bindingObj);
     }
 
+    /// <summary>
+    /// Resets all key bindings
+    /// </summary>
     public void resetKeyBindings()
     {
         InputManager.resetKeyBindings();
         refreshAllBindings?.Invoke();
     }
 
+    /// <summary>
+    /// Starts the interactive rebinding process
+    /// </summary>
+    /// <param name="bindingObject"> The script on the particular binding prefab </param>
     public void StartInteractiveRebind(BindingObject bindingObject)
     {
         screenDimmerObj.SetActive(true);
@@ -60,6 +67,11 @@ public class SettingsManager : MonoBehaviour
             OnRebindComplete);
     }
 
+    /// <summary>
+    /// The method that is run when the rebind is complete
+    /// </summary>
+    /// <param name="bindingObject"> The script on the particular binding prefab </param>
+    /// <param name="foundDuplicate"> Whether or not a duplicate binding was found </param>
     private void OnRebindComplete(BindingObject bindingObject, bool foundDuplicate)
     {
         screenDimmerObj.SetActive(false);
@@ -76,6 +88,9 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The method that is run when the rebinding operation is canceled
+    /// </summary>
     private void OnRebindCancel()
     {
         screenDimmerObj.SetActive(false);

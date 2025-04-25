@@ -31,7 +31,9 @@ public class InputManager : MonoBehaviour
 
         sampleInput = new SampleInput();
 
-        scope = sampleInput.Player;
+        scope = sampleInput.Player; // Assigns which input action map should be allowed to be rebinded
+
+        // Loads in saved rebindings if there are any
         string rebindsJSON = PlayerPrefs.GetString("rebinds");
         if (!(rebindsJSON == null || rebindsJSON.Length == 0))
         {
@@ -63,12 +65,17 @@ public class InputManager : MonoBehaviour
         ability2.Disable();
     }
 
+    /// <summary> Resets all bindings to the default </summary>
     public static void resetKeyBindings()
     {
         scope.RemoveAllBindingOverrides();
         saveBindingOverridesAsJson();
     }
 
+    /// <summary> Rebinds a particular binding. </summary>
+    /// <param name="bindingObject"> The binding script on a binding prefab </param>
+    /// <param name="onCancel"> The method that should be run if the rebinding operation is canceled </param>
+    /// <param name="onComplete"> The method that should be run if the rebinding operation has completed </param>
     public static void RebindBindingAtIndex(BindingObject bindingObject, Action onCancel, Action<BindingObject, bool> onComplete)
     {
         InputAction inputAction = bindingObject.inputAction;
@@ -129,6 +136,7 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
+    /// <summary> Saves the scope's rebindings as a player preference </summary>
     private static void saveBindingOverridesAsJson()
     {
         PlayerPrefs.SetString("rebinds", scope.SaveBindingOverridesAsJson());
